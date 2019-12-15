@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.tedu.store.mapper.DistrictMapper">
+
+	<!-- 获取所有省/某省所有市/某市所有区的列表 -->
+	<!-- List<District> findByParent(String parent) -->
+	<select id="findByParent"
+		resultType="cn.tedu.store.entity.District">
+		SELECT
+		code, name
+		FROM
+		t_dict_district
+		WHERE
+		parent=#{parent}
+		ORDER BY
+		code ASC
+	</select>
+
+	<!-- 根据代号获取省/市/区的信息 -->
+	<!-- District findByCode(String code) -->
+	<select id="findByCode"
+		resultType="cn.tedu.store.entity.District">
+		SELECT
+		name
+		FROM
+		t_dict_district
+		WHERE
+		code=#{code}
+	</select>
+	
+	<!-- 将指定用户的所有收货地址设置为非默认 -->
+<!-- Integer updateNonDefault(Integer uid) -->
+<update id="updateNonDefault">
+    UPDATE
+        t_address
+    SET
+        is_default=0
+    WHERE 
+        uid=#{uid}
+</update>
+
+<!-- 将指定的收货地址设置为默认 -->
+<!-- Integer updateDefault(Integer aid) -->
+<update id="updateDefault">
+    UPDATE
+        t_address
+    SET
+        is_default=1
+    WHERE 
+        aid=#{aid}
+</update>
+
+<!-- 根据收货地址id查询匹配的数据 -->
+<!-- Address findByAid(Integer aid) -->
+<select id="findByAid"
+    resultType="cn.tedu.store.entity.Address">
+    SELECT 
+        uid
+    FROM 
+        t_address 
+    WHERE 
+        aid=#{aid} 
+</select>
+</mapper>

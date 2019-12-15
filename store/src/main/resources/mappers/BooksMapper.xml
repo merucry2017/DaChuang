@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.tedu.store.mapper.BooksMapper">
+
+	<!-- 处理书籍数据的持久层接口 -->
+	<!-- List<Goods> findHotGoods() -->
+	<select id="findHotBooks"
+		resultType="cn.tedu.store.entity.Books">
+		SELECT
+		id, title, writer, image
+		FROM
+		t_books
+
+	</select>
+
+	<!-- 根据id查询书籍详情 -->
+	<!-- Books findById(Long id) -->
+	<select id="findById" resultType="cn.tedu.store.entity.Books">
+		SELECT
+		image, title,
+		writer, content,
+		publishTime,page,
+		themeWords
+		FROM
+		t_books
+		WHERE
+		id=#{id}
+	</select>
+	
+	<!-- 根据search查询书籍详情 -->
+	<!-- Books -->
+	<select id="findBySearch" resultType="cn.tedu.store.entity.Books">
+		SELECT
+		id,image, title,
+		writer, content,
+		publishTime,page,
+		themeWords
+		FROM
+		t_books
+		WHERE
+		title LIKE CONCAT('%',#{search},'%')
+		OR
+		writer LIKE CONCAT('%',#{search},'%')
+	</select>
+</mapper>
