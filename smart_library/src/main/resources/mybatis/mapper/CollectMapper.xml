@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.library.smart_library.mapper.CollectMapper">
+    <!--<select id="selectBlog" resultType="Blog">-->
+    <!--select * from Blog where id = #{id}-->
+  <!--</select>-->
+    <!--插入收藏-->
+    <insert id="insert">
+        INSERT INTO s_collect(
+          bcid,uid,bid,
+          created_time,
+          is_delete
+        )VALUES (
+          #{btype},#{uid},#{bid},
+          #{created_time},
+          #{is_delete}
+        )
+    </insert>
+
+    <!--删除收藏-->
+    <delete id="delete">
+        DELETE FROM
+        s_collect
+        WHERE
+        bid=#{bid}
+        AND
+        uid=#{uid}
+    </delete>
+
+    <!--通过uid和bid查找收藏书籍-->
+    <select id="findByUidAndBid" resultType="com.library.smart_library.entity.Book">
+        SELECT
+        s_book.bid,writer,
+        btype,title,content,
+        image,publish_time,
+        page,s_book.is_delete
+        FROM s_book
+        INNER JOIN s_collect
+        ON s_collect.uid=#{uid}
+        AND s_collect.bid=#{bid}
+        AND s_book.bid=s_collect.bid
+        ORDER BY s_book.bid
+    </select>
+
+    <!--通过uid查找收藏书籍-->
+    <select id="findByUid" resultType="com.library.smart_library.entity.Collect">
+        SELECT
+        s_book.bid,writer,
+        btype,title,content,
+        image,publish_time,
+        page,s_book.is_delete
+        AS
+        is_delete
+        FROM s_book
+        INNER JOIN s_collect
+        ON s_collect.uid=#{uid}
+        AND s_book.bid=s_collect.bid
+        ORDER BY s_book.bid
+    </select>
+
+</mapper>

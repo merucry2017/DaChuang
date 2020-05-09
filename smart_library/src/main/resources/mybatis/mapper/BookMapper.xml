@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.library.smart_library.mapper.BookMapper">
+    <!--<select id="selectBlog" resultType="Blog">-->
+    <!--select * from Blog where id = #{id}-->
+  <!--</select>-->
+    <!--插入书籍-->
+    <insert id="insert">
+        INSERT INTO s_book(
+          writer,
+          btype,title,content,
+          image,publish_time,
+          page,is_delete
+        )VALUES (
+          #{writer},
+          #{btype},#{title},#{content},
+          #{image},#{publishTime},
+          #{page},#{is_delete}
+        )
+    </insert>
+
+    <!--删除书籍-->
+    <delete id="delete">
+        DELETE FROM s_book
+        WHERE
+        bid=#{bid}
+        OR
+        (title=#{title}
+        AND
+        writer=#{writer}
+        )
+    </delete>
+
+    <!--更新书籍-->
+    <update id="update">
+        UPDATE
+        s_book
+        SET
+        writer=#{writer},
+        btype=#{btype},title=#{title},content=#{content},
+        image=#{image},publish_time=#{publishTime},
+        page=#{page},is_delete=#{is_delete}
+        WHERE
+        bid=#{bid}
+        OR
+        (title=#{title}
+        AND
+        writer=#{writer}
+        )
+    </update>
+
+    <!--通过writer和title查找书籍-->
+    <select id="findByWriterAndTitle" resultType="com.library.smart_library.entity.Book">
+        SELECT
+        bid,writer,btype,title,
+        content,image,publish_time,
+        page,diffcult,is_delete
+        AS
+        is_delete
+        FROM
+        s_book
+        WHERE
+        title=#{title}
+        AND
+        writer=#{writer}
+    </select>
+
+    <!--通过bid查找书籍-->
+    <select id="findByBid" resultType="com.library.smart_library.entity.Book">
+        SELECT
+        bid,writer,btype,title,
+        content,image,publish_time,
+        page,diffcult,is_delete
+        AS
+        is_delete
+        FROM
+        s_book
+        WHERE
+        bid=#{bid}
+    </select>
+
+    <!--通过类型查找书籍-->
+    <select id="findByBtype" resultType="com.library.smart_library.entity.Book">
+        SELECT
+        s1.bid,writer,
+        btype,title,content,
+        image,publish_time,
+        page,diffcult,
+        s1.is_delete
+        FROM
+        s_book s1
+        INNER JOIN s_book_category s2
+        ON s2.bcid=#{btype}
+        AND s1.btype=s2.type
+        ORDER BY s1.bid
+    </select>
+
+    <!--通过关键字搜索-->
+    <select id="findBySearch" resultType="com.library.smart_library.entity.Book">
+        SELECT
+        bid,writer,btype,title,
+        content,image,publish_time,
+        page,diffcult,is_delete
+        AS
+        is_delete
+        FROM
+        s_book
+        WHERE
+        title LIKE CONCAT('%',#{search},'%')
+        OR
+		writer LIKE CONCAT('%',#{search},'%')
+		OR
+		btype=#{search}
+    </select>
+    
+</mapper>

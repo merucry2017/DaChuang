@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>注册</title>
+    <!-- Bootstrap core CSS -->
+    <link href="../static/asserts/css/bootstrap.min.css" th:href="@{/webjars/bootstrap/4.0.0/css/bootstrap.css}"
+          rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="../static/asserts/css/signin.css" th:href="@{/asserts/css/signin.css}" rel="stylesheet">
+</head>
+<body class="text-center">
+<form class="form-signin" action="/register" th:action="@{/register}" method="post">
+    <a href="index.html">
+    <img class="mb-4" th:src="@{/asserts/img/favicons/logo.png}"
+         src="../static/asserts/img/favicons/logo.png" width="50%" height="35%">
+    </a>
+    <h1 class="h3 mb-3 font-weight-normal" th:text="#{reg.tip}">Please insert</h1>
+    <!--判断-->
+    <p style="color: red" th:text="${msg}" th:if="${not #strings.isEmpty(msg)}"></p>
+    <!--用户名-->
+    <label class="sr-only" th:text="#{login.username}">Username</label>
+    <input type="text" name="username" class="form-control" placeholder="Username" th:placeholder="#{login.username}" required="" autofocus="">
+
+    <!-- 密码-->
+    <label class="sr-only" th:text="#{login.password}">Password</label>
+    <input type="password" name="password" class="form-control" style="margin-bottom: 0px" placeholder="Password" th:placeholder="#{login.password}" required="">
+
+    <!--确认密码-->
+    <label class="sr-only" th:text="#{reg.cpassword}">Confirm Password</label>
+    <input type="password" name="cpassword" class="form-control" style="margin-bottom: 0px" placeholder="Password" th:placeholder="#{reg.cpassword}" required=""/>
+
+    <!--电话-->
+    <label class="sr-only" th:text="#{reg.phone}">Phone</label>
+    <input name="phone" type="text" class="form-control" th:placeholder="#{reg.tip}+#{reg.phone}" placeholder="Please insert">
+
+    <!--邮箱-->
+    <label class="sr-only" th:text="#{reg.email}">Email</label>
+    <input name="email" type="text" class="form-control" th:placeholder="#{reg.tip}+#{reg.email}" placeholder="Please insert">
+
+    <!--专业-->
+    <label class="sr-only" th:text="#{reg.major}"> Major：</label>
+    <select name="major" class="form-control" style="height: 48px">
+        <option value="计算机科学与技术_2_4">---Please insert major---</option>
+        <option value="计算机科学与技术_2_4" >计算机科学与技术</option>
+        <option value="软件工程_2_4">软件工程</option>
+        <option value="信息与计算科学_2_4">信息与计算科学</option>
+        <option value="新闻学_1_3">新闻学</option>
+    </select>
+    <div class="checkbox mb-3">
+    <!--性别-->
+    <label class="sr-only" th:text="#{reg.gender}">Gender</label>
+    <input type="radio" name="gender" value="1" th:placeholder="#{reg.gender1}" checked> Man
+    <input type="radio" name="gender" value="0" th:placeholder="#{reg.gender0}" style="margin-left: 25px"> Woman
+    <!--提交按钮-->
+    </div>
+    <button class="btn btn-lg btn-primary btn-block" type="submit" th:text="#{login.reg}">Register</button>
+    <button class="btn btn-lg btn-primary btn-block" onclick="window.location.href='./login.html'" th:text="#{reg.retu}">Return</button>
+    <p class="mt-5 mb-3 text-muted">© 2019-2020</p>
+    <a class="btn btn-sm" th:href="@{/register.html(l='zh_CN')}">中文</a>
+    <a class="btn btn-sm" th:href="@{/register.html(l='en_US')}">English</a>
+</form>
+
+</body>
+</html>

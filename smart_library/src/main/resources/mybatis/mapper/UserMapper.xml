@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.library.smart_library.mapper.UserMapper">
+    <!--<select id="selectBlog" resultType="Blog">-->
+    <!--select * from Blog where id = #{id}-->
+  <!--</select>-->
+    <!--插入用户-->
+    <insert id="insert" >
+        INSERT INTO s_user(
+          username,password,
+          salt,gender,phone,
+          email,created_time,
+          modified_time,major,
+          is_delete
+        )VALUES(
+          #{username},#{password},
+          #{salt},#{gender},#{phone},
+          #{email},#{created_time},
+          #{modified_time},#{major},
+          #{is_delete}
+        )
+    </insert>
+
+    <!--通过username查用户数据-->
+    <select id="findByUsername" resultType="com.library.smart_library.entity.User">
+        SELECT
+        uid,
+        username,password,
+        salt,gender,phone,
+        email,is_delete
+        AS
+        is_delete
+        FROM
+        s_user
+        WHERE
+        username=#{username}
+    </select>
+
+    <!--更新用户密码-->
+    <update id="updatePassword">
+        UPDATE
+        s_user
+        SET
+        password=#{password},
+        modified_time=#{modifiedTime}
+        WHERE
+        uid=#{uid}
+    </update>
+
+    <!--通过uid找用户-->
+    <select id="findByUid" resultType="com.library.smart_library.entity.User">
+        SELECT
+        username,password,
+        salt,gender,phone,
+        email,major,is_delete
+        AS
+        is_delete
+        FROM
+        s_user
+        WHERE
+        uid=#{uid}
+    </select>
+
+    <!--修改用户信息-->
+    <update id="updateInfo">
+        UPDATE
+        s_user
+        SET
+        phone=#{phone},email=#{email},
+        gender=#{gender},
+        modified_time=#{modified_time}
+        WHERE
+        uid=#{uid}
+    </update>
+</mapper>

@@ -1,0 +1,20 @@
+spring:
+  datasource:
+    username: root
+    password: hxq123456
+    url: jdbc:mysql://47.103.212.94:3306/smart_library?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    driver-class-name: com.mysql.jdbc.Driver
+    initialization-mode: always
+
+  messages:
+    basename: i18n.login, i18n.reg
+
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+
+mybatis:
+  mapper-locations: classpath:mybatis/mapper/*.xml
+
+server:
+  port: 8081

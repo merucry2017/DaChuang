@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.library.smart_library.mapper.QuestionMapper">
+    <!--<select id="selectBlog" resultType="Blog">-->
+    <!--select * from Blog where id = #{id}-->
+  <!--</select>-->
+    <!--插入问题-->
+    <insert id="insert">
+
+    </insert>
+
+    <!--更新问题 -->
+    <update id="update">
+
+    </update>
+
+    <!--通过bid查找问题-->
+    <select id="findByBid" resultType="com.library.smart_library.entity.Question">
+        SELECT
+        qid,bid,btype,
+        question,answer,
+        is_delete
+        AS
+        is_delete
+        FROM
+        s_question
+        WHERE
+        bid=#{bid}
+    </select>
+
+    <!--通过uid查找问题-->
+    <select id="findByUid" resultType="com.library.smart_library.entity.Question">
+        SELECT
+        s1.qid,bid,btype,
+        question,answer,
+        s1.is_delete
+        AS
+        is_delete
+        FROM
+        s_question s1
+        INNER JOIN
+        s_wrong s2
+        WHERE
+        s2.uid=#{uid}
+        AND
+        s2.qid=s1.qid
+    </select>
+
+    <!--查找收藏的某个问题-->
+    <select id="findByUidAndQid" resultType="com.library.smart_library.entity.Question">
+        SELECT
+        wid,uid,qid,
+        create_time,
+        is_delete
+        AS
+        is_delete
+        FROM
+        s_wrong
+        WHERE
+        uid=#{uid}
+        AND
+        qid=#{qid}
+    </select>
+
+    <!--收藏问题-->
+    <insert id="collectQuestion">
+        INSERT INTO s_wrong(
+        uid,qid,
+        create_time,
+        is_delete)
+        VALUES (
+        #{uid},#{qid},
+        #{created_time},
+        #{is_delete}
+        )
+    </insert>
+
+    <!--删除问题-->
+    <delete id="cancelQuestion">
+        DELETE FROM
+        s_wrong
+        WHERE
+        uid=#{uid}
+        AND
+        qid=#{qid}
+    </delete>
+</mapper>

@@ -1,0 +1,88 @@
+/*鍟嗗搧澶у浘鐗囨牱寮�*/
+
+.img-big {
+	width: 100%;
+	display: none;
+	/*border: 2px solid #aaaaaa;*/
+	border-radius: 3px;
+	margin: 0;
+	padding: 0;
+}
+
+/*鍟嗗搧灏忓浘鐗囩殑鏍峰紡*/
+
+.img-small {
+	border: 1px solid #dddddd;
+	margin: 5px;
+	padding: 1px;
+	cursor: pointer;
+}
+
+/*澶у浘鐗囧垵濮嬫儏鍐靛彧鏄剧ず涓�寮狅紝鍙鐨勬牱寮�*/
+
+.big-show {
+	display: block;
+}
+
+
+/*浠锋牸妗嗙殑灏忓瓧浣撴牱寮�*/
+
+.price-bar small {
+	font-size: 35px;
+}
+
+/*浠锋牸妗嗙殑鏍峰紡*/
+
+.price-bar {
+	background: #f0f9ff;
+	color: #092f97;
+	padding: 8px;
+	border: 3px solid #699fd7;
+	border-radius: 3px;
+	font-size: 30px;
+	margin: 5px;
+}
+
+/*璐拱琛ㄥ崟鐨勯棿闅�*/
+
+.product-form {
+	margin: 10px 0;
+}
+
+/*琛ㄥ崟琛岀殑闂撮殧*/
+
+.form-space {
+	margin: 10px 0;
+}
+
+/*鍞悗鐨勫浘鏍�*/
+
+.saled-icon {
+	color: #092F97;
+	font-size: 25px;
+}
+
+/*鍞悗鐨勬爣棰�*/
+
+.saled-title {
+	color: #092F97;
+	font-size: 18px;
+}
+
+/*鍞悗鐨勫唴瀹�*/
+
+.saled-content {
+	color: #999999;
+	font-size: 12px;
+	padding-bottom: 40px;
+}
+
+/*鏁伴噺鎸夐挳鏍峰紡*/
+
+.num-btn {
+	width: 30px;
+}
+
+.num-text {
+	text-align: center;
+}
